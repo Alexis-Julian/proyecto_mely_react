@@ -9,6 +9,17 @@ function App() {
 	const [useStyle, setStyle] = useState();
 	const [useDisplay, setDisplay] = useState();
 	const [useChangeString, setChangeString] = useState(true);
+	/* Btn_No */
+	const [useNewPosition, setNewPosition] = useState([0, 0, 0, 0]);
+	const [useAbsolute, setAbsolute] = useState("");
+
+	function RandomNumber() {
+		const medidas = [];
+		for (let i = 0; i < 4; i++) {
+			medidas.push(Math.round(Math.random() * 93));
+		}
+		return medidas;
+	}
 
 	const HandleOnClickHearth = () => {
 		let escala = 1;
@@ -44,6 +55,12 @@ function App() {
 		const intervalScale = setInterval(AnimationHearth, 100);
 	};
 
+	const HandleOnMouseOver = () => {
+		const medidas = RandomNumber();
+		setNewPosition(medidas);
+		setAbsolute("absolute");
+	};
+
 	return (
 		<>
 			<div className="structure">
@@ -66,7 +83,19 @@ function App() {
 						</div>
 					</div>
 				</div>
-				<div className="hitbox" id="boton" style={{ display: useStyle }}>
+				<div
+					className="hitbox"
+					id="boton"
+					style={{
+						display: useStyle,
+						position: useAbsolute,
+						top: useNewPosition[0] + "%",
+						bottom: useNewPosition[1] + "%",
+						right: useNewPosition[2] + "%",
+						left: useNewPosition[3] + "%",
+					}}
+					onMouseOver={() => HandleOnMouseOver()}
+				>
 					<button>No 😡</button>
 				</div>
 			</div>
